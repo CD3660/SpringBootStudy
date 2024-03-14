@@ -8,7 +8,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
@@ -46,7 +48,7 @@ public class MemoRepositoryTest {
         Sort sort1 = Sort.by("mno").descending();
         Sort sort2 = Sort.by("memoText").ascending();
         Sort sortAll = sort1.and(sort2);
-        Pageable pageable = PageRequest.of(0,10, sort); // 앞쪽이 현재 페이지 정보, 뒤는 페이지 당 개수
+        Pageable pageable = PageRequest.of(0,10, sortAll); // 앞쪽이 현재 페이지 정보, 뒤는 페이지 당 개수
 
         Page<Memo> result = memoRepository.findAll(pageable);
         System.out.println(result);
@@ -63,6 +65,8 @@ public class MemoRepositoryTest {
             System.out.println(memo);
         }
     }
+
+
 
 
 }
